@@ -1,16 +1,25 @@
-# This is a sample Python script.
 
-# Press Shift+F10 to execute it or replace it with your code.
-# Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
-
-
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press Ctrl+F8 to toggle the breakpoint.
+from selenium import webdriver
+import config
+import time
 
 
-# Press the green button in the gutter to run the script.
-if __name__ == '__main__':
-    print_hi('PyCharm')
+driver = webdriver.Chrome(executable_path='chromedriver.exe')
 
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
+driver.get('https://vk.com/')
+
+login = driver.find_element_by_id('index_email')
+login.send_keys(config.login)
+
+password = driver.find_element_by_id('index_pass')
+password.send_keys(config.password)
+
+button = driver.find_element_by_id('index_login_button')
+button.click()
+#driver.close()
+
+
+time.sleep(4)
+driver.get('https://vk.com/im?sel=137136455')
+field = driver.find_element_by_id('im_editable137136455')
+field.send_keys('Привет!')
